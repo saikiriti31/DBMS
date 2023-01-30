@@ -1,0 +1,76 @@
+mysql> select * from student_marksheets
+    -> where studentage between 18 and 21;
++------------+-------------+------------+---------------+
+| registerno | studentname | studentage | studentnumber |
++------------+-------------+------------+---------------+
+|  192110285 | sudarshan   |         18 |          NULL |
+|  192110286 | nithish     |         19 |          NULL |
+|  192110284 | bhargav     |         21 |          NULL |
++------------+-------------+------------+---------------+
+3 rows in set (0.05 sec)
+mysql> select * from student_marksheets
+    -> where studentname in('sudarshan','nithish','bhargav');
++------------+-------------+------------+---------------+
+| registerno | studentname | studentage | studentnumber |
++------------+-------------+------------+---------------+
+|  192110284 | bhargav     |         21 |          NULL |
+|  192110286 | nithish     |         19 |          NULL |
+|  192110285 | sudarshan   |         18 |          NULL |
++------------+-------------+------------+---------------+
+3 rows in set (0.00 sec)
+mysql> select count(studentname) from student_marksheets;
++--------------------+
+| count(studentname) |
++--------------------+
+|                  3 |
++--------------------+
+1 row in set (0.03 sec)
+
+mysql> select sum(studentage)
+    -> from student_marksheets;
++-----------------+
+| sum(studentage) |
++-----------------+
+|              58 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select average(studentage)
+    -> from student_marksheets;
+ERROR 1305 (42000): FUNCTION students.average does not exist
+mysql> select avg(studentage)
+    -> from student_marksheets;
++-----------------+
+| avg(studentage) |
++-----------------+
+|         19.3333 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select min(studentage)
+    -> from student_marksheets;
++-----------------+
+| min(studentage) |
++-----------------+
+|              18 |
++-----------------+
+1 row in set (0.02 sec)
+
+mysql> select max(studentage)
+    -> from student_marksheets;
++-----------------+
+| max(studentage) |
++-----------------+
+|              21 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select registerno
+    -> from student_marksheets
+    -> limit 1;
++------------+
+| registerno |
++------------+
+|  192110285 |
++------------+
+1 row in set (0.00 sec)

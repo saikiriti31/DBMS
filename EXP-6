@@ -1,0 +1,70 @@
+mysql> use school_management;
+Database changed
+mysql> desc school_management;
+ERROR 1146 (42S02): Table 'school_management.school_management' doesn't exist
+mysql> create table school_management
+    ->  (corseno int,id int,name char(10),age int,city char(10));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from school_management;
+Empty set (0.00 sec)
+
+mysql> desc school_management;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| corseno | int      | YES  |     | NULL    |       |
+| id      | int      | YES  |     | NULL    |       |
+| name    | char(10) | YES  |     | NULL    |       |
+| age     | int      | YES  |     | NULL    |       |
+| city    | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+insert into school_management values(102,192110285,'sudarshan',18,'kdp'),(104,192110283,'bhargav',19,'chitoor'),(103,192110284,'rakesh',21,'chennai')
+,(101,192110289,'sunil',22,'tirupati');
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from school_management;
++---------+-----------+-----------+------+----------+
+| corseno | id        | name      | age  | city     |
++---------+-----------+-----------+------+----------+
+|     102 | 192110285 | sudarshan |   18 | kdp      |
+|     104 | 192110283 | bhargav   |   19 | chitoor  |
+|     103 | 192110284 | rakesh    |   21 | chennai  |
+|     101 | 192110289 | sunil     |   22 | tirupati |
++---------+-----------+-----------+------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select courseno,count(courseno) from school_management group by courseno;
+ERROR 1054 (42S22): Unknown column 'courseno' in 'field list'
+mysql> select corseno,count(corseno) from school_management group by corseno;
++---------+----------------+
+| corseno | count(corseno) |
++---------+----------------+
+|     102 |              1 |
+|     104 |              1 |
+|     103 |              1 |
+|     101 |              1 |
++---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from school_management order by corseno;
++---------+-----------+-----------+------+----------+
+| corseno | id        | name      | age  | city     |
++---------+-----------+-----------+------+----------+
+|     101 | 192110289 | sunil     |   22 | tirupati |
+|     102 | 192110285 | sudarshan |   18 | kdp      |
+|     103 | 192110284 | rakesh    |   21 | chennai  |
+|     104 | 192110283 | bhargav   |   19 | chitoor  |
++---------+-----------+-----------+------+----------+
+4 rows in set (0.00 sec)
+select sum(age),corseno from school_management group by corseno having sum(age)>18;
++----------+---------+
+| sum(age) | corseno |
++----------+---------+
+|       19 |     104 |
+|       21 |     103 |
+|       22 |     101 |
++----------+---------+
+3 rows in set (0.03 sec)
